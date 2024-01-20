@@ -26,52 +26,40 @@
   },
   "employees": [
     {
-      "id": "a00b",
-      "firstName": "Tharindu Manoj",
-      "lastName": "Thilakarathna",
-      "email": "manojtharindu11@gmail.com",
-      "dateOfBirth": "2024-01-15T18:30:00.000Z",
+      "id": "8a00",
+      "firstName": "sandun",
+      "lastName": "kumara",
+      "email": "sadun@gmail.com",
+      "dateOfBirth": "1993-06-08T18:30:00.000Z",
       "gender": "male",
+      "education": "Matric",
+      "companyName": "DiretFN",
+      "experience": 9,
+      "package": 55
+    },
+    {
+      "firstName": "sarangi",
+      "lastName": "chethana",
+      "email": "s2@gmail.com",
+      "dateOfBirth": "2005-05-06T18:00:00.000Z",
+      "gender": "female",
+      "education": "Matric",
+      "companyName": "direct",
+      "experience": 8,
+      "package": 200000,
+      "id": "72cf"
+    },
+    {
+      "id": "5910",
+      "firstName": "supipi",
+      "lastName": "kaveesha",
+      "email": "skavee@gmail.com",
+      "dateOfBirth": "2024-01-08T18:30:00.000Z",
+      "gender": "female",
       "education": "Intermediate",
-      "companyName": "None",
-      "experience": 7,
-      "package": 5
-    },
-    {
-      "id": "c03a",
-      "firstName": "Deepthi",
-      "lastName": "Rasad",
-      "email": "deepthi@gmail.comm",
-      "dateOfBirth": "2024-01-15T18:30:00.000Z",
-      "gender": "",
-      "education": "Post Graduate",
-      "companyName": "Fake",
-      "experience": 5,
-      "package": 10
-    },
-    {
-      "id": "fefd",
-      "firstName": "Tharindu Manoj",
-      "lastName": "Thilakarathna",
-      "email": "manojtharindu11@gmail.com",
-      "dateOfBirth": "2023-12-31T18:30:00.000Z",
-      "gender": "male",
-      "education": "Diploma",
-      "companyName": "None",
-      "experience": "",
-      "package": ""
-    },
-    {
-      "id": "7739",
-      "firstName": "",
-      "lastName": "",
-      "email": "",
-      "dateOfBirth": "2024-01-01T18:30:00.000Z",
-      "gender": "",
-      "education": "",
-      "companyName": "",
-      "experience": "",
-      "package": ""
+      "companyName": "so4",
+      "experience": 3,
+      "package": 12
     }
   ]
 }

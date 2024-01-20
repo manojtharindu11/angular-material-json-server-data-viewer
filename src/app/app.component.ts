@@ -2,6 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EmpAddEditComponent } from './Component/emp-add-edit/emp-add-edit.component';
 import { EmployeeService } from './services/employee.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import { CoreService } from './core/core.service';
 
 
 @Component({
@@ -10,34 +14,48 @@ import { EmployeeService } from './services/employee.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
-  title = 'Crud-app'
   displayedColumns: string[] = [
-    'id',
     'firstName',
     'lastName',
-    'email',
     'dateOfBirth',
     'gender',
+    'email',
     'education',
     'experience',
-    'companyName',
     'package',
+    'companyName',
+    'action'
   ];
+  dataSource!: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  title = 'Crud-app';
 
   constructor(
     private _dialog: MatDialog,
-    private _empService: EmployeeService
+    private _empService: EmployeeService,
+    private _coreService: CoreService
   ) {}
 
   openAddEditEmpForm() {
-    this._dialog.open(EmpAddEditComponent);
+    const dialogRef = this._dialog.open(EmpAddEditComponent);
+    dialogRef.afterClosed().subscribe({
+      next: (res) => {
+          if (res) {
+            this.getEmployeeList();
+          }
+      }
+    })
   }
 
   getEmployeeList() {
     this._empService.getEmployeeList().subscribe({
       next: (res: any) => {
-        console.log(res);
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       },
       error: (err: any) => {
         console.log(err);
@@ -47,5 +65,39 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployeeList();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  deleteemployee(id: string) {
+    this._empService.deleteEmployee(id).subscribe({
+      next: (res:any) => {
+        this._coreService.openSnackBar("Employee deleted successfully!","done");
+        this.getEmployeeList();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  openEditForm(data: any){
+    const dialogRef = this._dialog.open(EmpAddEditComponent,{
+      data
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (res) => {
+          if (res) {
+            this.getEmployeeList();
+          }
+      }
+    })
   }
 }
