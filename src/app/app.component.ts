@@ -1,10 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EmpAddEditComponent } from './Component/emp-add-edit/emp-add-edit.component';
+import { EmployeeService } from './services/employee.service';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'crud-app';
+export class AppComponent implements OnInit {
+
+  title = 'Crud-app'
+  displayedColumns: string[] = [
+    'id',
+    'firstName',
+    'lastName',
+    'email',
+    'dateOfBirth',
+    'gender',
+    'education',
+    'experience',
+    'companyName',
+    'package',
+  ];
+
+  constructor(
+    private _dialog: MatDialog,
+    private _empService: EmployeeService
+  ) {}
+
+  openAddEditEmpForm() {
+    this._dialog.open(EmpAddEditComponent);
+  }
+
+  getEmployeeList() {
+    this._empService.getEmployeeList().subscribe({
+      next: (res: any) => {
+        console.log(res);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
+
+  ngOnInit(): void {
+    this.getEmployeeList();
+  }
 }
