@@ -36,6 +36,7 @@ export class EmpAddEditComponent {
       this.empService.addEmployee(this.empForm.value).subscribe({
         next: (val: any) => {
           alert('Employee added successfully.');
+          location.reload();
           this._dialogRef.close();
         },
         error: (err: any) => {

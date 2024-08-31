@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
 
   title = 'Crud-app'
   displayedColumns: string[] = [
-    'id',
     'firstName',
     'lastName',
     'email',
@@ -24,6 +23,8 @@ export class AppComponent implements OnInit {
     'companyName',
     'package',
   ];
+
+  employeeList : any[] = [];
 
   constructor(
     private _dialog: MatDialog,
@@ -38,6 +39,8 @@ export class AppComponent implements OnInit {
     this._empService.getEmployeeList().subscribe({
       next: (res: any) => {
         console.log(res);
+        if (res != null)
+          this.employeeList = res;
       },
       error: (err: any) => {
         console.log(err);
